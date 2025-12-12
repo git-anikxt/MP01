@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* (Your existing profile styles are now in style.css) */
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="Assets/logo.svg" alt="QuizApp Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="student.html">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Project</a></li>
+            <li><a href="#">Connect</a></li>
+        </ul>
+        <div class="nav-auth" id="nav-auth-container">
+            </div>
+    </nav>
+
+    <main>
+        <div id="dashboard-view">
+            <div class="dashboard-tabs">
+                <button class="tab-btn dashboard-tab-btn active" data-tab="available-quizzes">Available Quizzes</button>
+                <button class="tab-btn dashboard-tab-btn" data-tab="my-attempts">My Quiz Library</button>
+            </div>
+
+            <div id="available-quizzes" class="tab-content dashboard-tab-content active">
+                <h2>Available Quizzes</h2>
+                <div class="quiz-list" id="available-list-container"></div>
+            </div>
+
+            <div id="my-attempts" class="tab-content dashboard-tab-content">
+                <h2>My Quiz Library (Attempts)</h2>
+                <div class="quiz-list" id="attempts-list-container"></div>
+            </div>
+        </div>
+
+        <div id="quiz-view-container" class="tab-content" style="display: none;">
+            <h2 id="quiz-view-title">Quiz Title</h2>
+            <h3 id="quiz-view-description">Quiz Description</h3>
+            <form id="quiz-attempt-form">
+                <div id="quiz-questions-area"></div>
+                <button type="submit" class="btn" style="width: auto; margin-top: 2rem;">Submit Quiz</button>
+            </form>
+        </div>
+
+        <div id="profile-view" style="display: none;">
+            <div class="profile-header">
+                <h2>My Profile</h2>
+                <button id="back-to-dash-btn" class="btn btn-secondary" style="width: auto;">Back to Dashboard</button>
+            </div>
+            
+            <div class="dashboard-tabs">
+                <button class="tab-btn profile-tab-btn active" data-tab="p-info">Profile</button>
+                <button class="tab-btn profile-tab-btn" data-tab="p-history">History</button>
+                <button class="tab-btn profile-tab-btn" data-tab="p-stats">Statistics</button>
+                <button class="tab-btn profile-tab-btn" data-tab="p-performance">Performance</button> <button class="tab-btn profile-tab-btn" data-tab="p-filter">Filter Quizzes</button> <button class="tab-btn profile-tab-btn" data-tab="p-settings">Settings</button>
+            </div>
+
+            <div id="p-info" class="tab-content profile-tab-content active">
+                <h3>Profile Information</h3>
+                <p><strong>Username:</strong> <span id="p-info-username"></span></p>
+                <p><strong>Role:</strong> Student</p>
+            </div>
+            
+            <div id="p-history" class="tab-content profile-tab-content">
+                <h3>History / Results</h3>
+                <p>These are the quizzes you have completed.</p>
+                <div class="quiz-list" id="p-history-list-container" style="margin-top: 1.5rem;"></div>
+            </div>
+            
+            <div id="p-stats" class="tab-content profile-tab-content">
+                <h3>My Statistics</h3>
+                <div class="stats-container" id="p-stats-container">
+                    </div>
+            </div>
+
+            <div id="p-performance" class="tab-content profile-tab-content">
+                <h3>Performance Breakdown</h3>
+                <div id="p-performance-container">
+                    </div>
+            </div>
+
+            <div id="p-filter" class="tab-content profile-tab-content">
+                <h3>Filter & Sort Quizzes</h3>
+                <div class="filter-controls">
+                    <div class="form-group">
+                        <label for="filter-subject-stud">Subject</label>
+                        <select id="filter-subject-stud">
+                            <option value="all">All Subjects</option>
+                            <option value="COA">COA</option>
+                            <option value="DS">DS</option>
+                            <option value="DSTL">DSTL</option>
+                            <option value="Maths">Math's</option>
+                            <option value="Python">Python</option>
+                            <option value="UHV">UHV</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-status-stud">Status</label>
+                        <select id="filter-status-stud">
+                            <option value="all">All</option>
+                            <option value="attempted">Attempted</option>
+                            <option value="not_attempted">Not Attempted</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-sort-stud">Sort by</label>
+                        <select id="filter-sort-stud">
+                            <option value="title">Title (A-Z)</option>
+                            <option value="category">Category</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="quiz-list" id="p-filtered-list-container-stud">
+                    </div>
+            </div>
+
+            <div id="p-settings" class="tab-content profile-tab-content">
+                <h3>Settings</h3>
+                <form id="change-password-form" style="max-width: 400px;">
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-new-password">Confirm New Password</label>
+                        <input type="password" id="confirm-new-password" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: auto;">Update Password</button>
+                </form>
+            </div>
+        </div>
+        </main>
+    <script src="api.js"></script>
+    <script src="api-globals.js"></script>
+    <script src="student.js"></script>
+</body>
+</html>

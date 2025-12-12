@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* (Your existing profile styles are now in style.css) */
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="Assets/logo.svg" alt="QuizApp Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="teacher.html">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Project</a></li>
+            <li><a href="#">Connect</a></li>
+        </ul>
+        <div class="nav-auth" id="nav-auth-container">
+            </div>
+    </nav>
+
+    <main>
+        <div id="dashboard-view">
+            <div class="dashboard-tabs">
+                <button class="tab-btn dashboard-tab-btn active" data-tab="create-quiz">Create Quiz</button>
+                <button class="tab-btn dashboard-tab-btn" data-tab="quiz-library">Quiz Library</button>
+                <button class="tab-btn dashboard-tab-btn" data-tab="take-quiz">Take Quiz (Preview)</button>
+            </div>
+
+            <div id="create-quiz" class="tab-content dashboard-tab-content active">
+                <h2>Create/Update Quiz</h2>
+                <form id="create-quiz-form">
+                    <input type="hidden" id="quiz-edit-id"> 
+                    <div class="form-group">
+                        <label for="quiz-title">Quiz Title</label>
+                        <input type="text" id="quiz-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quiz-description">Quiz Description</label>
+                        <textarea id="quiz-description" rows="3" style="width: 100%; padding: 10px; border: 1px solid var(--light-gray);"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="quiz-category">Category</label>
+                        <select id="quiz-category">
+                            <option value="COA">COA</option>
+                            <option value="DS">DS</option>
+                            <option value="DSTL">DSTL</option>
+                            <option value="Maths">Math's</option>
+                            <option value="Python">Python</option>
+                            <option value="UHV">UHV</option>
+                        </select>
+                    </div>
+
+                    <hr style="margin: 2rem 0;">
+                    <h3>Questions</h3>
+                    <div id="questions-container"></div>
+                    <button type="button" class="btn btn-secondary" id="add-question-btn" style="width: auto; margin-right: 10px;">Add Question</button>
+                    <button type="submit" class="btn" id="save-quiz-btn" style="width: auto;">Save Quiz</button>
+                </form>
+            </div>
+
+            <div id="quiz-library" class="tab-content dashboard-tab-content">
+                <h2>My Quiz Library</h2>
+                <div class="quiz-list" id="library-list-container">
+                    </div>
+            </div>
+
+            <div id="take-quiz" class="tab-content dashboard-tab-content">
+                <h2>Take a Quiz (Preview)</h2>
+                <p>Select a quiz from your library to preview it.</p>
+                <div class="quiz-list" id="preview-list-container"></div>
+                <hr style="margin: 2rem 0;">
+                <div id="quiz-preview-area"></div>
+            </div>
+        </div>
+        <div id="profile-view" style="display: none;">
+            <div class="profile-header">
+                <h2>My Profile</h2>
+                <button id="back-to-dash-btn" class="btn btn-secondary" style="width: auto;">Back to Dashboard</button>
+            </div>
+            
+            <div class="dashboard-tabs">
+                <button class="tab-btn profile-tab-btn active" data-tab="p-info">Profile</button>
+                <button class="tab-btn profile-tab-btn" data-tab="p-quizzes">My Quizzes</button>
+                <button class="tab-btn profile-tab-btn" data-tab="p-stats">Statistics</button>
+                <button class="tab-btn profile-tab-btn" data-tab="p-filter">Filter Quizzes</button> <button class="tab-btn profile-tab-btn" data-tab="p-settings">Settings</button>
+            </div>
+
+            <div id="p-info" class="tab-content profile-tab-content active">
+                <h3>Profile Information</h3>
+                <p><strong>Username:</strong> <span id="p-info-username"></span></p>
+                <p><strong>Role:</strong> Teacher</p>
+            </div>
+
+            <div id="p-quizzes" class="tab-content profile-tab-content">
+                <h3>My Quizzes</h3>
+                <p>This is a list of all quizzes you have created. Actions are in the main "Quiz Library".</p>
+                <div class="quiz-list" id="p-quizzes-list-container" style="margin-top: 1.5rem;"></div>
+            </div>
+            
+            <div id="p-stats" class="tab-content profile-tab-content">
+                <h3>My Quiz Statistics</h3>
+                <div id="p-stats-container"></div>
+            </div>
+
+            <div id="p-filter" class="tab-content profile-tab-content">
+                <h3>Filter & Sort Quizzes</h3>
+                <div class="filter-controls">
+                    <div class="form-group">
+                        <label for="filter-subject">Subject</label>
+                        <select id="filter-subject">
+                            <option value="all">All Subjects</option>
+                            <option value="COA">COA</option>
+                            <option value="DS">DS</option>
+                            <option value="DSTL">DSTL</option>
+                            <option value="Maths">Math's</option>
+                            <option value="Python">Python</option>
+                            <option value="UHV">UHV</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-status">Status</label>
+                        <select id="filter-status">
+                            <option value="all">All</option>
+                            <option value="published">Published</option>
+                            <option value="unpublished">Unpublished (Draft)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-sort">Sort by Date</label>
+                        <select id="filter-sort">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="quiz-list" id="p-filtered-list-container">
+                    </div>
+            </div>
+
+            <div id="p-settings" class="tab-content profile-tab-content">
+                <h3>Settings</h3>
+                <form id="change-password-form" style="max-width: 400px;">
+                    <div class="form-group">
+                        <label for="new-password">New Password</label>
+                        <input type="password" id="new-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-new-password">Confirm New Password</label>
+                        <input type="password" id="confirm-new-password" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: auto;">Update Password</button>
+                </form>
+            </div>
+        </div>
+        </main>
+    <script src="api.js"></script>
+    <script src="api-globals.js"></script>
+    <script src="teacher.js"></script>
+</body>
+</html>
